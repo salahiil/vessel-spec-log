@@ -1,0 +1,6 @@
+name = Vessel Specification Log
+description = Custom form to capture a vessel's machine and parts details (Berbera Port)
+package = Custom Modules
+core = 7.x
+files[] = vessel_spec_log.install
+files[] = vessel_spec_log.module

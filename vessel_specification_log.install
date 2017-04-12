@@ -1,0 +1,181 @@
+<?php
+
+/**
+ * Implements hook_uninstall().
+ *
+ * As in hook_install, there is no need to uninstall schema, Drupal will do it
+ * for us.
+ *
+ * @see hook_uninstall()
+ * @ingroup dbtng_example
+ */
+function vesselmachinery_uninstall() {
+  // To be completed. Although, not required right now as drupal core deletes data itself on uninstall
+}
+
+/**
+ * Implements hook_schema().
+ *
+ * Defines the database tables used by this module.
+ * Remember that the easiest way to create the code for hook_schema is with
+ * the @link http://drupal.org/project/schema schema module @endlink
+ *
+ * @return [type] [description]
+ * @see hook_schema()
+ * @ingroup dbtng_example
+ */
+function vesselmachinery_schema() {
+
+	  $schema['vesselmachinery_customtable'] = array(
+	     // example (partial) specification for table "mytable1"
+	     'description' => 'vessel machinery log table.',
+		 'fields' => array(
+		       'pid' => array(   // The primary identifier
+		         'type' => 'serial',
+		         'not null' => TRUE,
+		         'description' => 'The primary identifier for my table.',
+		        ),
+		 		/* 'nid' not required YET as we're not saving this as a custom content type. However, needs to be completed
+		 	        before Berbera Port review the form
+		     	    'nid' => array(		/* nid - This is the {node}.nid for this node as determined by the node module.
+		     	    Best to make the 'nid' field to be a unique key as each node should only have one entry. */
+				/*	'description' => 'The {node}.nid of the node being created.',
+					'type' => 'int',
+					'unsigned' => TRUE,
+					'not null' => TRUE,
+				), */
+
+				'uid' => array(		// uid - This is the {users}.uid of the user that created the node.
+					'description' => 'The {user}.uid of the user this node belongs to.',
+					'type' => 'int',
+					'unsigned' => TRUE,
+					'not null' => TRUE,
+				),
+		        'vessel_id' => array(
+		        	'type' => 'int',
+		        	'not null' => TRUE,
+		        	'default' => '0',
+		        	'description' => 'A field type for storing an integer number.',
+		        ),
+		        'vessel_name' => array(
+		        	 'type' => 'varchar',
+					 'length' => 255,
+		        	 'not null' => TRUE,
+		        	 'default' => '',
+		        	 'description' => 'A field type for storing short strings.',
+		        ),
+		        'vessel_type' => array(
+		        	 'type' => 'varchar',
+					 'length' => 255,
+		         	 'not null' => TRUE,
+		        	 'default' => '',
+		        	 'description' => '',
+		        ),
+		        'machine_id' => array(
+		        	'type' => 'int',
+		        	'not null' => TRUE,
+		        	'default' => '0',
+		        	'description' => '',
+		        ),
+		        'machine_type' => array(
+		        	 'type' => 'varchar',
+					 'length' => 255,
+		        	 'not null' => TRUE,
+		        	 'default' => '',
+		        	 'description' => '',
+		        ),
+		        'machine_manufacturer' => array(
+		        	 'type' => 'varchar',
+					 'length' => 255,
+		        	 'not null' => TRUE,
+		        	 'default' => '',
+		        	 'description' => '',
+		        ),
+		        'machine_model' => array(
+		        	 'type' => 'varchar',
+					 'length' => 255,
+		        	 'not null' => TRUE,
+		        	 'default' => '',
+		        	 'description' => '',
+		        ),
+		        'machine_serial_nbr' => array(
+		        	 'type' => 'varchar',
+					 'length' => 255,
+		        	 'not null' => TRUE,
+		        	 'default' => '',
+		        	 'description' => '',
+		        ),
+			    'machine_tech_data' => array(
+					 'description' => '',
+					 'type' => 'text',
+					 'size' => 'big', // Text area (multiple rows)
+					 'not null' => TRUE,
+				),
+				'parts_id' => array(
+        			 'type' => 'int',
+        			 'not null' => TRUE,
+        			 'default' => 0,
+        			 'size' => 'tiny',
+       				 'description' => '',
+      			),
+		        'parts_type' => array(
+		        	 'type' => 'varchar',
+					 'length' => 255,
+		        	 'not null' => TRUE,
+		        	 'default' => '',
+		        	 'description' => '',
+		        ),
+				'parts_tech_spec_id' => array(
+        			 'type' => 'int',
+        			 'not null' => TRUE,
+        			 'default' => 0,
+        			 'size' => 'tiny',
+       				 'description' => '',
+      			),
+		        'parts_tech_spec_desc' => array(
+		        	 'type' => 'varchar',
+					 'length' => 255,
+		        	 'not null' => TRUE,
+		        	 'default' => '',
+		        	 'description' => '',
+		        ),
+		        'parts_tech_spec_value' => array(
+		        	 'type' => 'varchar',
+					 'length' => 255,
+		        	 'not null' => TRUE,
+		        	 'default' => '',
+		        	 'description' => '',
+		        ),
+
+			),
+
+    		'primary key' 							=> array('pid'),
+    		'indexes' 								=> array(
+      			'uid'    							=> array('uid'),
+      			'vessel_id' 						=> array('vessel_id'),
+      			'vessel_name'     					=> array('vessel_name'),
+      			'vessel_type'    					=> array('vessel_type'),
+      			'machine_id' 						=> array('machine_id'),
+      			'machine_type'     					=> array('machine_type'),
+      			'machine_manufacturer'    			=> array('machine_manufacturer'),
+      			'machine_model' 					=> array('machine_model'),
+      			'machine_serial_nbr'     			=> array('machine_serial_nbr'),
+      			'machine_tech_data'    				=> array('machine_tech_data'),
+      			'parts_id' 							=> array('parts_id'),
+      			'parts_type'     					=> array('parts_type'),
+       			'parts_tech_spec_id'    			=> array('parts_tech_spec_id'),
+      			'parts_tech_spec_desc' 				=> array('parts_tech_spec_desc'),
+      			'parts_tech_spec_value'    			=> array('parts_tech_spec_value'),
+    		),
+
+			/* keep for now
+	       	'index' => array('nid'),
+				'primary key' => array('nid'),
+				'unique keys' => array(
+				'nid' => array('nid'),
+			), */
+
+    	);
+
+    	return $schema;
+	}

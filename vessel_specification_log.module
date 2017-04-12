@@ -1,0 +1,360 @@
+<?php
+
+/**
+ * @file
+ * client: Berbera Port
+ * This custom module provides a node type called 'Vessel Specification Log' & it's form
+ *
+ * Step 0: Register permissions for the module usinh hook_permission()
+ * Step 1: Register a path to the form using hook_menu()
+ * Step 2: Define the form
+ * Step 3: Register a theme function with hook_theme()
+ * Step 4: Write the theme function
+*/
+
+/**
+ * Implements hook_permission
+ * [vessel_specification_log_permission description]
+ * @return [type] [description]
+ */
+function vessel_specification_log_permission() {
+    return array(
+      'submit vessel_specification_log' => array(
+        'title' => t('Submit Vessel Specification Log form'),
+        'description' => t('Submit Vessel Specification Log form.'),
+      ),
+    );
+ }
+
+/**
+ * Implements hook_menu
+ * register a path to our page that will display the form.
+ * [vessel_specification_log_menu description]
+ * @return [type] [description]
+*/
+function vessel_specification_log_menu()  {
+	$items = array();
+
+	$items['vessel_specification_log'] = array(
+		// // we create variable that indicates that page path will be «our_site/ vessel_specification_log»,
+   		// our page has the following parameters
+		'title' => 'Vessel Specification Log',
+		'type' => MENU_NORMAL_ITEM,   // THE MENU WILL APPEAR IN 'Navigation' Menu section NOT in 'MAIN' menu
+		'access arguments' => array('submit vessel_specification_log'),
+		'page callback'	=> 'drupal_get_form',
+		'page arguments' => array('vessel_specification_log_form'),
+		// 'access callback' => TRUE, ----not required cos we're using hook_permission
+		'description' => 'This facility is providing the option to record and retrieve detailed information about each and
+every machinery part related to certain equipment such as (model, serial no, maker).
+',
+	);
+	// return our variable
+	return $items;
+}
+
+/**
+ * Implements hook_form and hook_form_state
+ * Define the form
+ * [vessel_specification_log_form description]
+ * @param  [type] $form       [description]
+ * @param  [type] $form_state [description]
+ * @return [type]             [description]
+*/
+function vessel_specification_log_form($form, &$form_state)  {
+
+		$form['vessel'] = array(
+			'#type' => 'fieldset',
+			'#title' => t('Vessel'),
+		);
+		$form['vessel']['vessel_id'] = array(
+  			'#weight' => '0',
+			'#type' => 'textfield',
+			'#title' => t('Id'),
+			'#required' => TRUE,
+			'#size' => 3,
+			'#maxlength' => 3,
+		);
+		$form['vessel']['vessel_name'] = array(
+  			'#weight' => '1',
+			'#type' => 'textfield',
+			'#title' => t('Vessel Name'),
+			'#required' => TRUE,
+			'#size' => 20,
+			'#maxlength' => 20,
+		);
+		$form['vessel']['vessel_type'] = array(
+  			'#weight' => '2',
+			'#type' => 'textfield',
+			'#title' => t('Vessel Type'),
+			'#required' => TRUE,
+			'#size' => 20,
+			'#maxlength' => 20,
+		);
+		$form['machine'] = array(
+			'#type' => 'fieldset',
+			'#title' => t('Machine'),
+		);
+		$form['machine']['machine_id'] = array(
+  			'#weight' => '0',
+			'#type' => 'textfield',
+			'#title' => t('Id'),
+			'#required' => TRUE,
+			'#size' => 3,
+			'#maxlength' => 3,
+		);
+		$form['machine']['machine_type'] = array(
+  			'#weight' => '1',
+			'#type' => 'textfield',
+			'#title' => t('Machine Type'),
+			'#required' => TRUE,
+			'#size' => 20,
+			'#maxlength' => 20,
+		);
+		$form['machine']['machine_manufacturer'] = array(
+  			'#weight' => '2',
+			'#type' => 'textfield',
+			'#title' => t('Manufacturer'),
+			'#required' => TRUE,
+			'#size' => 20,
+			'#maxlength' => 20,
+		);
+		$form['machine']['machine_model'] = array(
+  			'#weight' => '3',
+			'#type' => 'textfield',
+			'#title' => t('Model'),
+			'#required' => TRUE,
+			'#size' => 20,
+			'#maxlength' => 20,
+		);
+		$form['machine']['machine_serial_nbr'] = array(
+  			'#weight' => '4',
+			'#type' => 'textfield',
+			'#title' => t('Serial No.'),
+			'#required' => TRUE,
+			'#size' => 20,
+			'#maxlength' => 20,
+		);
+		$form['machine']['machine_tech_data'] = array(
+  			'#weight' => '5',
+			'#type' => 'textarea',
+			'#default_value' => $txt_area,
+			'#title' => t('Technical Data'),
+			'#required' => TRUE,
+			'#size' => 20,
+			'#maxlength' => 20,
+			'#rows' => 5,
+		);
+		$form['parts'] = array(
+			'#type' => 'fieldset',
+			'#title' => t('Equipment/Parts'),
+		);
+		$form['parts']['parts_id'] = array(
+  			'#weight' => '0',
+			'#type' => 'textfield',
+			'#title' => t('Id'),
+			'#required' => TRUE,
+			'#size' => 3,
+			'#maxlength' => 3,
+		);
+		$form['parts']['parts_type'] = array(
+  			'#weight' => '1',
+			'#type' => 'textfield',
+			'#title' => t('Parts Type'),
+			'#required' => TRUE,
+			'#size' => 20,
+			'#maxlength' => 20,
+		);
+		$form['parts_tech_spec'] = array(
+			'#type' => 'fieldset',
+			'#title' => t('Parts/Equipment'),
+		);
+		$form['parts_tech_spec']['parts_tech_spec_id'] = array(
+  			'#weight' => '0',
+			'#type' => 'textfield',
+			'#title' => t('Id'),
+			'#required' => TRUE,
+			'#size' => 3,
+			'#maxlength' => 3,
+		);
+		$form['parts_tech_spec']['parts_tech_spec_desc'] = array(
+  			'#weight' => '1',
+			'#type' => 'textfield',
+			'#title' => t('Description'),
+			'#required' => TRUE,
+			'#size' => 20,
+			'#maxlength' => 20,
+		);
+		$form['parts_tech_spec']['parts_tech_spec_value'] = array(
+  			'#weight' => '2',
+			'#type' => 'textfield',
+			'#title' => t('Value'),
+			'#required' => TRUE,
+			'#size' => 20,
+			'#maxlength' => 20,
+		);
+
+
+		/* A wrapper element to group one or more buttons in a form. Use of the 'actions' element as an array key helps to ensure proper styling in themes and to enable other modules to properly alter a form's actions. Also, adds a simple submit button that refreshes the form and clears its contents. This is the default behavior for forms. */
+		$form['actions'] = array('#type' => 'actions');
+	 	$form['actions']['submit'] = array(
+		  '#type' => 'submit',
+		  '#value' => t('Save form'),
+	    	);
+		/* $form['actions']['delete'] = array(
+		  '#type' => 'button',
+		  '#value' => t('Delete'),
+	    	); */
+
+		// Get the path to the module
+		$path = drupal_get_path('module', 'vessel_specification_log');
+
+		// Attach the CSS and JS to the form: The benefit of adding the scripts in this method, rather than using drupal_add_js() and drupal_add_css(), is that the form can be altered by another module using hook_form_alter(), changing the stylesheets and scripts if necessary.
+		$form['#attached'] = array('css' => array('type' => 'file', 'data' => $path . '/vessel-specification-log.css',),
+			'js' => array('type' => 'file', 'data' => $path . '/js/vessel-specification-log.js',),
+		);
+
+        return $form;
+}
+
+/**
+ * Implements hook_theme
+ * Register a theme function with hook_theme()
+ * [vessel_specification_log_theme description]
+ * @return [type] [description]
+ */
+function vessel_specification_log_theme() {
+	return array(
+		'vessel_specification_log_form' => array(
+			'render element' => 'form'
+		),
+	);
+}
+
+/**
+ * Implements hook_form
+ * [theme_vessel_specification_log_form description]
+ * @param  [type] $variables [description]
+ * @return [type]            [description]
+ */
+function theme_vessel_specification_log_form($variables)  {
+		// Isolate the form definition from the $variables array
+		$form = $variables['form'];
+		$output = '<h2>' . t('Please enter your information below') . '</h2>'; // 't' tells drupal this text is translatible into another language
+		// Put the entire structure into a div that can be used for CSS purposes
+		// $output .= '<fieldset class="borderedform">'; */
+		// Each of the pieces of text is wrapped in a <span> tag to allow it to be floated left
+		// Keep this as a personal reminder: $output .= '<span>' . t('My name is') . '</span>';
+
+		$output .= '<div id="vessel-spec-log">';
+		// $output .= '<div id="vessel">';
+		$output .= drupal_render($form['vessel']);
+		$output .= drupal_render($form['vessel']['vessel_id']);
+		$output .= drupal_render($form['vessel']['vessel_name']);
+		$output .= drupal_render($form['vessel']['vessel_type']);
+
+		// $output .= '<div id="machine">';
+		$output .= drupal_render($form['machine']);
+		$output .= drupal_render($form['machine']['machine_id']);
+		$output .= drupal_render($form['machine']['machine_type']);
+		$output .= drupal_render($form['machine']['machine_manufacturer']);
+		$output .= drupal_render($form['machine']['machine_model']);
+		$output .= drupal_render($form['machine']['machine_serial_nbr']);
+		$output .= drupal_render($form['machine']['machine_tech_data']);
+
+		// $output .= '<div id="parts">';
+		$output .= drupal_render($form['parts']);
+		$output .= drupal_render($form['parts']['parts_id']);
+		$output .= drupal_render($form['parts']['parts_type']);
+
+		// $output .= '<div id="parts_tech_spec">';
+		$output .= drupal_render($form['parts_tech_spec']['parts_tech_spec_id']);
+		$output .= drupal_render($form['parts_tech_spec']['parts_tech_spec_desc']);
+		$output .= drupal_render($form['parts_tech_spec']['parts_tech_spec_value']);
+
+		// Keep this as a personal reminder: $output .= '<span>' . t('and I am') . '</span>';
+		// $output .= drupal_render($form['age']);
+		// Keep this as a personal reminder: $output .= '<span>' . t('years old.') . '</span>';
+		$output .= drupal_render($form['actions']['submit']);
+		$output .= drupal_render($form['actions']['delete']);
+		$output .= '</div>';
+		// Pass the remaining form elements through drupal_render_children()
+		$output .= drupal_render_children($form);
+
+        // return the output
+		return $output;
+}
+
+
+/**
+ * Implements hook_form_validate
+ * [vessel_specification_log_form_validate description]
+ *
+ * Validation handler: validate the form: warning this validation script only checks if a number is entered.
+ * It does not differentiate between whether the number entered is an integer, or a decimal, etc.
+ *
+ * @param  [type] $form       [description]
+ * @param  [type] $form_state [description]
+ * @return [type]             [description]
+ */
+function vessel_specification_log_form_validate($form, &$form_state) {
+    print("<pre>" . print_r($form_state['values'], 1) . "</pre>");
+
+		// drupal_set_message("I am inside submit handler. Printed form values below");
+		// drupal_set_message('<pre>'.print_r($form_state, true).'</pre>');
+
+		// $form_state['values'] is used to extract submitted values !
+		      // drupal_set_message("Printing Form Structure Below !");
+		      // drupal_set_message("<pre>" . print_r($form, 1) . "</pre>");
+		/* Validation
+		if (!is_numeric($form_state['values']['age'] == '')) {
+			form_set_error('age', t('You must enter a valid number.'));
+		  return FALSE;
+		}
+    		return TRUE; */
+}
+
+/**
+ * Implements hook_form_submit
+ * [vessel_specification_log_form_submit description]
+ * @param  [type] $form       [description]
+ * @param  [type] $form_state [description]
+ * @return [type]             [description]
+ */
+function vessel_specification_log_form_submit($form, &$form_state) {
+// insert fields into table name 'vessel_specification_log' using primary key 'pid'
+    $pid = db_insert('vessel_specification_log')
+	      ->fields(array(
+				'uid' => $uid,
+				'vessel_id' 				=> $form_state['values']['vessel_id'],
+				'vessel_name'				=> $form_state['values']['vessel_name'],
+				'vessel_type' 				=> $form_state['values']['vessel_type'],
+				'machine_id' 				=> $form_state['values']['machine_id'],
+				'machine_type'				=> $form_state['values']['machine_type'],
+				'machine_manufacturer' 		=> $form_state['values']['machine_manufacturer'],
+				'machine_model' 			=> $form_state['values']['machine_model'],
+				'machine_serial_nbr'		=> $form_state['values']['machine_serial_nbr'],
+				'machine_tech_data' 		=> $form_state['values']['machine_tech_data'],
+				'parts_id' 					=> $form_state['values']['parts_id'],
+				'parts_type'				=> $form_state['values']['parts_type'],
+				'parts_tech_spec_id' 		=> $form_state['values']['parts_tech_spec_id'],
+				'parts_tech_spec_desc' 		=> $form_state['values']['parts_tech_spec_desc'],
+				'parts_tech_spec_value'		=> $form_state['values']['parts_tech_spec_value'],
+	      ))
+          ->execute();
+
+        drupal_set_message("Your form has been added");
+	    drupal_set_message('vessel_id: '.$form_state['values']['vessel_id']);
+	    drupal_set_message('vessel_name: '.$form_state['values']['vessel_name']);
+	    drupal_set_message('vessel_type: '.$form_state['values']['vessel_type']);
+	    drupal_set_message('machine_id: '.$form_state['values']['machine_id']);
+	    drupal_set_message('machine_type: '.$form_state['values']['machine_type']);
+	    drupal_set_message('machine_manufacturer: '.$form_state['values']['machine_manufacturer']);
+	    drupal_set_message('machine_model: '.$form_state['values']['machine_model']);
+	    drupal_set_message('machine_serial_nbr: '.$form_state['values']['machine_serial_nbr']);
+	    drupal_set_message('machine_tech_data: '.$form_state['values']['machine_tech_data']);
+	    drupal_set_message('parts_id: '.$form_state['values']['parts_id']);
+	    drupal_set_message('parts_type: '.$form_state['values']['parts_type']);
+	    drupal_set_message('parts_tech_spec_id: '.$form_state['values']['parts_tech_spec_id']);
+	    drupal_set_message('parts_tech_spec_desc: '.$form_state['values']['parts_tech_spec_desc']);
+	    drupal_set_message('parts_tech_spec_value: '.$form_state['values']['parts_tech_spec_value']);
+}

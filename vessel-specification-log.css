@@ -1,0 +1,132 @@
+/* =======================================================================================
+*
+* styling for my 'vessel-spec-log' custom module
+*/
+#vessel-spec-log {
+	width: 600px; margin: 10px; padding: 60px 30px 90px 30px;
+	background: #c9d0de; border: 1px solid #e1e1e1;
+  -moz-box-shadow: 0px 0px 8px #444;
+	-webkit-box-shadow: 0px 0px 8px #444;
+	box-shadow: 0px 0px 8px #444;
+	border: thin;
+}
+
+#vessel-spec-log span, #vessel-spec-log div
+{
+	float:left;
+	margin-right: 20px;
+}
+
+#vessel-spec-log fieldset {
+	border: 2px solid; /* #e1e1e1; */
+	border-left-color:#A0A0A0;
+	border-top-color:#A0A0A0;
+	border-right-color:#A0A0A0;
+	border-bottom-color:#A0A0A0;
+	-moz-border-bottom-colors:#A0A0A0; /* firefox */
+	-moz-border-bottom-colors:#A0A0A0;
+	-moz-border-bottom-colors:#A0A0A0;
+	-moz-border-bottom-colors:#A0A0A0;
+	border-left-color-value:#A0A0A0;
+	border-top-color-value:#A0A0A0;
+	border-right-color-value:#A0A0A0;
+	border-bottom-color-value:#A0A0A0;
+	-moz-box-shadow: 1px #A0A0A0;
+	-webkit-box-shadow: 1px #A0A0A0;
+	border-outline: solid 1.5px #A0A0A0;
+	width:580px; /* controls the width of the fieldset border */
+	border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
+	background-color:#CACACA;
+}
+
+/* controls the positioning etc of the legend (title) BUT NOT IT'S BORDER - see further down for legend's border  */
+#vessel-spec-log legend {
+	margin-left:10px;
+	font-weight:bold;
+}
+
+#vessel-spec-log .form-item-first-name, #vessel-spec-log .form-item-last-name
+{
+	width:125px;
+}
+
+#edit-first-name, #edit-last-name
+{
+	width:120px;
+}
+
+#vessel-spec-log .form-item-age
+{
+	width:75px;
+}
+
+#edit-age
+{
+	width:75px;
+}
+
+/* controls the positioning of the border for legend  */
+#vessel-spec-log span {
+	margin-left:5px;
+	margin-right:5px;
+	padding-top:5px;
+}
+/*
+The css above sets a width on the form elements, runs everything together by floating everything left, and adds spacing between the elements to make it look nice. */
+
+#vessel-spec-log h1 {
+	font-size: 14px; color: #445668; text-transform: capitalize;
+	text-align: center; margin: 0 0 35px 0; text-shadow: 0px 1px 0px #f2f2f2;
+}
+
+#vessel-spec-log label {
+	margin-left: 10px;
+	font-family: sans-serif;
+	font-size: 12px; color: #445668;
+	text-transform: capitalize;
+}
+
+#vessel-spec-log input {
+	margin-left: 10px;
+	background: #5E768D;
+	background: -moz-linear-gradient(top, #546A7F 0%, #5E768D 20%); /* firefox */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#546A7F), color-stop(20%,#5E768D)); /* webkit */
+	border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
+	-moz-box-shadow: 0px 1px 0px #f2f2f2;-webkit-box-shadow: 0px 1px 0px #f2f2f2;
+	font-family: sans-serif; font-size: 12px; color: #f2f2f2; text-transform: capitalize; text-shadow: 0px -1px 0px #334f71;
+}
+	#vessel-spec-log input::-webkit-input-placeholder  {
+    	color: #a1b2c3; text-shadow: 0px -1px 0px #38506b;
+	}
+	#vessel-spec-log input:-moz-placeholder {
+	    color: #a1b2c3; text-shadow: 0px -1px 0px #38506b;
+	}
+
+#vessel-spec-log textarea {
+	background: #5E768D;
+	background: -moz-linear-gradient(top, #546A7F 0%, #5E768D 20%); /* firefox */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#546A7F), color-stop(20%,#5E768D)); /* webkit */
+	border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
+	-moz-box-shadow: 0px 1px 0px #f2f2f2;-webkit-box-shadow: 0px 1px 0px #f2f2f2;
+	font-family: sans-serif; font-size: 12px; color: #f2f2f2; text-transform: capitalize; text-shadow: 0px -1px 0px #334f71;
+}
+	#vessel-spec-log textarea::-webkit-input-placeholder  {
+    	color: #a1b2c3; text-shadow: 0px -1px 0px #38506b;
+	}
+	#vessel-spec-log textarea:-moz-placeholder {
+	    color: #a1b2c3; text-shadow: 0px -1px 0px #38506b;
+	}
+
+#vessel-spec-log input:focus, #vessel-spec-log textarea:focus {
+	background: #728eaa;
+	background: -moz-linear-gradient(top, #668099 0%, #728eaa 20%); /* firefox */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#668099), color-stop(20%,#728eaa)); /* webkit */
+}
+
+#vessel-spec-log input[type=submit] {
+	-moz-box-shadow: 0px 0px 5px #999;-webkit-box-shadow: 0px 0px 5px #999;
+	border: 1px solid #556f8c;
+	background: -moz-linear-gradient(top, #718DA9 0%, #415D79 100%); /* firefox */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#718DA9), color-stop(100%,#415D79)); /* webkit */
+	cursor: pointer;
+}
